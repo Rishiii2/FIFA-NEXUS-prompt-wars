@@ -1,16 +1,15 @@
-# React + Vite
+# FIFA Nexus - PromptWars Hackathon 2026
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**Live Deployment:** [https://fifa-nexus-prompt-wars.vercel.app/](https://fifa-nexus-prompt-wars.vercel.app/)
 
-Currently, two official plugins are available:
+A GenAI-enabled solution designed to enhance stadium operations and the overall tournament experience for the FIFA World Cup 2026. Built during the PromptWars Hackathon by Hack2skill.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- **Context-Aware Fan Chatbot (Gemini API):** Multilingual assistant that processes live stadium data to help fans navigate and find the shortest queues.
+- **AI Operational Intelligence:** A live background agent that analyzes stadium heatmap data and dynamically generates predictive security and operations alerts.
+- **Premium Glassmorphism UI:** Stunning dark-mode dashboard tailored for real-time sports metrics.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Tech Stack
+- React + Vite
+- Google Gemini API (`@google/generative-ai`)
+- Vanilla CSS (Glassmorphism & Micro-animations)
