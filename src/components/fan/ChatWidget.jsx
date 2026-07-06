@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Globe2, Sparkles, Image as ImageIcon } from 'lucide-react';
+import DOMPurify from 'dompurify';
 import { getGeminiChatResponse } from '../../services/gemini';
 import { useData } from '../../data/DataContext';
 import './ChatWidget.css';
@@ -25,9 +26,10 @@ const ChatWidget = () => {
 
   const handleSend = async (e) => {
     e.preventDefault();
-    if (!input.trim() && !selectedFile) return;
+    const sanitizedInput = DOMPurify.sanitize(input);
+    if (!sanitizedInput.trim() && !selectedFile) return;
 
-    const userText = input || "I uploaded an image.";
+    const userText = sanitizedInput || "I uploaded an image.";
     const userMsg = { id: Date.now(), sender: 'user', text: userText + (selectedFile ? ` [Attached: ${selectedFile.name}]` : '') };
     setMessages(prev => [...prev, userMsg]);
     
@@ -96,18 +98,20 @@ const ChatWidget = () => {
           onClick={() => fileInputRef.current?.click()}
           style={{ background: 'none', border: 'none', color: selectedFile ? 'var(--accent-teal)' : 'var(--text-secondary)', cursor: 'pointer', padding: '0.5rem', display: 'flex', alignItems: 'center' }}
           title="Upload Ticket Image"
+          aria-label="Upload Ticket Image"
         >
-          <ImageIcon size={20} />
+          <ImageIcon size={20} aria-hidden="true" />
         </button>
         <input 
           type="text" 
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask a question or scan a ticket..." 
+          aria-label="Chat input message"
           style={{ flex: 1, padding: '0.8rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: '#fff' }}
         />
-        <button type="submit" disabled={!input.trim() && !selectedFile} className="send-btn" style={{ padding: '0.8rem', borderRadius: '8px', background: 'var(--accent-teal)', color: '#000', border: 'none', cursor: 'pointer' }}>
-          <Send size={18} />
+        <button type="submit" disabled={!input.trim() && !selectedFile} className="send-btn" aria-label="Send message" style={{ padding: '0.8rem', borderRadius: '8px', background: 'var(--accent-teal)', color: '#000', border: 'none', cursor: 'pointer' }}>
+          <Send size={18} aria-hidden="true" />
         </button>
       </form>
     </div>

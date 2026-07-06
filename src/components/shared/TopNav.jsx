@@ -12,22 +12,26 @@ const TopNav = ({ activeTab, setActiveTab }) => {
         <h1 className="neon-text">FIFA NEXUS</h1>
       </div>
       
-      <div className="nav-tabs">
+      <nav className="nav-tabs" aria-label="Main Navigation">
         <button 
           className={`nav-tab ${activeTab === 'staff' ? 'active' : ''}`}
           onClick={() => setActiveTab('staff')}
+          aria-label="Switch to Staff Dashboard"
+          aria-pressed={activeTab === 'staff'}
         >
-          <Activity size={18} />
+          <Activity size={18} aria-hidden="true" />
           <span>Staff Dashboard</span>
         </button>
         <button 
           className={`nav-tab ${activeTab === 'fan' ? 'active' : ''}`}
           onClick={() => setActiveTab('fan')}
+          aria-label="Switch to Fan Portal"
+          aria-pressed={activeTab === 'fan'}
         >
-          <MessageSquare size={18} />
+          <MessageSquare size={18} aria-hidden="true" />
           <span>Fan Portal</span>
         </button>
-      </div>
+      </nav>
 
       <div className="nav-status">
         <div className="status-indicator">
