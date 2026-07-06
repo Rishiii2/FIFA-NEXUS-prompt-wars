@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
-import { getOperationalAlerts } from '../services/gemini';
+import { runMultiAgentPipeline } from '../services/gemini';
 
 const DataContext = createContext();
 
@@ -8,7 +8,7 @@ export const useData = () => useContext(DataContext);
 export const DataProvider = ({ children }) => {
   const [capacity, setCapacity] = useState(87);
   const [alerts, setAlerts] = useState([
-    { id: 1, text: "System Online. Monitoring stadium density.", type: "success", time: "Just now" }
+    { id: 1, text: "System Online. Monitoring stadium density.", type: "success", time: "Just now", reasoningTrace: null }
   ]);
   const [waitTimes, setWaitTimes] = useState({
     food: 12,
@@ -29,8 +29,8 @@ export const DataProvider = ({ children }) => {
     zonesRef.current = zones;
   }, [zones]);
 
-  const addAlert = (text, type = 'info') => {
-    setAlerts(prev => [{ id: Date.now(), text, type, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }, ...prev]);
+  const addAlert = (text, type = 'info', reasoningTrace = null) => {
+    setAlerts(prev => [{ id: Date.now() + Math.random(), text, type, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), reasoningTrace }, ...prev]);
   };
 
   // Simulate live data updates for basic metrics
@@ -51,13 +51,24 @@ export const DataProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
-  // AI Operational Manager - check density every 15 seconds
+  // Multi-Agent Pipeline - check density every 15 seconds
   useEffect(() => {
     const aiInterval = setInterval(async () => {
       const currentZones = zonesRef.current;
-      const alertData = await getOperationalAlerts(currentZones);
-      if (alertData) {
-        addAlert(`GenAI Alert: ${alertData.text}`, alertData.type);
+      const pipelineResult = await runMultiAgentPipeline(currentZones);
+      if (pipelineResult && pipelineResult.actions && pipelineResult.actions.length > 0) {
+        
+        let combinedMessage = pipelineResult.actions.map(a => a.message).join(' | ');
+        addAlert(`Action Deployed: ${combinedMessage}`, 'warning', pipelineResult.reasoningTrace);
+        
+        // Execute actions autonomously
+        setZones(prev => prev.map(zone => {
+          const actionForZone = pipelineResult.actions.find(a => a.zone === zone.id);
+          if (actionForZone && actionForZone.densityReduction) {
+            return { ...zone, density: Math.max(0, zone.density - actionForZone.densityReduction) };
+          }
+          return zone;
+        }));
       }
     }, 15000);
     return () => clearInterval(aiInterval);

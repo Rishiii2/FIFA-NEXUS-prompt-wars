@@ -23,6 +23,12 @@ const AlertFeed = () => {
             <div className="alert-icon">{getIcon(alert.type)}</div>
             <div className="alert-content">
               <p>{alert.text}</p>
+              {alert.reasoningTrace && (
+                <details className="reasoning-trace">
+                  <summary>View Agent Reasoning</summary>
+                  <p>{alert.reasoningTrace}</p>
+                </details>
+              )}
               <span className="alert-time">{alert.time}</span>
             </div>
           </div>

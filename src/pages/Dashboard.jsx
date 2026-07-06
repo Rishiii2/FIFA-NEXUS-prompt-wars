@@ -2,6 +2,7 @@ import React from 'react';
 import KpiCards from '../components/staff/KpiCards';
 import HeatmapGrid from '../components/staff/HeatmapGrid';
 import AlertFeed from '../components/staff/AlertFeed';
+import CrowdFlowChart from '../components/staff/CrowdFlowChart';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -15,6 +16,7 @@ const Dashboard = () => {
       <div className="dashboard-grid">
         <div className="main-panel">
           <HeatmapGrid />
+          <CrowdFlowChart />
         </div>
         <div className="side-panel">
           <AlertFeed />
