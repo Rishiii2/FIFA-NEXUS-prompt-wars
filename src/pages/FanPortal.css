@@ -1,0 +1,14 @@
+.fan-portal-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  height: calc(100vh - 150px);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@media (max-width: 1024px) {
+  .fan-portal-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}

@@ -1,0 +1,27 @@
+.fan-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fan-card {
+  padding: 1.5rem;
+}
+
+.fan-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.fan-card-header h4 {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.fan-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
