@@ -7,6 +7,8 @@ FIFA Nexus is an advanced, autonomous GenAI operations platform explicitly engin
 
 By moving beyond simple chat interfaces and leveraging deep Multi-Agent Orchestration, Structured JSON Outputs, and Context Grounding, FIFA Nexus directly addresses the massive scale and complexity of stadium management for the upcoming World Cup.
 
+👉 **[Read the Architectural Deep Dive](ARCHITECTURE.md)**
+
 ## Problem Statement Alignment
 
 The World Cup 2026 will be the largest ever. Stadium operators face unprecedented challenges in crowd control, incident response, and fan satisfaction. 
