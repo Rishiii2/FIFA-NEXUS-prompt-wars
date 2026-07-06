@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
 import KpiCards from '../components/staff/KpiCards';
 import HeatmapGrid from '../components/staff/HeatmapGrid';
 import AlertFeed from '../components/staff/AlertFeed';
 import CrowdFlowChart from '../components/staff/CrowdFlowChart';
 import './Dashboard.css';
 
-const Dashboard = () => {
+/**
+ * Staff Dashboard Page Component
+ * @returns {JSX.Element}
+ */
+const Dashboard = memo(() => {
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
@@ -24,6 +28,8 @@ const Dashboard = () => {
       </div>
     </div>
   );
-};
+});
+
+Dashboard.displayName = 'Dashboard';
 
 export default Dashboard;

@@ -1,11 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 import { Send, Bot, User, Globe2, Sparkles, Image as ImageIcon } from 'lucide-react';
 import DOMPurify from 'dompurify';
 import { getGeminiChatResponse } from '../../services/gemini';
 import { useData } from '../../data/DataContext';
+import PropTypes from 'prop-types';
 import './ChatWidget.css';
 
-const ChatWidget = () => {
+/**
+ * AI Chat Widget for Fans
+ * @returns {JSX.Element}
+ */
+const ChatWidget = memo(() => {
   const { waitTimes, capacity } = useData();
   const [messages, setMessages] = useState([
     { id: 1, sender: 'ai', text: "Welcome to FIFA Nexus! How can I assist you with your match day experience? (Try asking about wait times, or click the image icon to scan your ticket!)" }
@@ -116,6 +121,9 @@ const ChatWidget = () => {
       </form>
     </div>
   );
-};
+});
+
+ChatWidget.displayName = 'ChatWidget';
+ChatWidget.propTypes = {};
 
 export default ChatWidget;

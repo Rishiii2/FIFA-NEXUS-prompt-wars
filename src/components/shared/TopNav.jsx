@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useData } from '../../data/DataContext';
 import { Activity, MessageSquare } from 'lucide-react';
+import PropTypes from 'prop-types';
 import './TopNav.css';
 
-const TopNav = ({ activeTab, setActiveTab }) => {
+/**
+ * Top Navigation Component
+ * @param {Object} props - Component props
+ * @param {string} props.activeTab - Currently active tab ('staff' or 'fan')
+ * @param {Function} props.setActiveTab - Function to change active tab
+ * @returns {JSX.Element}
+ */
+const TopNav = memo(({ activeTab, setActiveTab }) => {
   const { capacity } = useData();
 
   return (
@@ -41,6 +49,12 @@ const TopNav = ({ activeTab, setActiveTab }) => {
       </div>
     </header>
   );
+});
+
+TopNav.displayName = 'TopNav';
+TopNav.propTypes = {
+  activeTab: PropTypes.string.isRequired,
+  setActiveTab: PropTypes.func.isRequired,
 };
 
 export default TopNav;

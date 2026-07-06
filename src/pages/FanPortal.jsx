@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 import ChatWidget from '../components/fan/ChatWidget';
 import FanCards from '../components/fan/FanCards';
 import './FanPortal.css';
 
-const FanPortal = () => {
+/**
+ * Fan Portal Page Component
+ * @returns {JSX.Element}
+ */
+const FanPortal = memo(() => {
   return (
     <div className="fan-portal-container">
       <div className="fan-sidebar">
@@ -14,6 +18,8 @@ const FanPortal = () => {
       </div>
     </div>
   );
-};
+});
+
+FanPortal.displayName = 'FanPortal';
 
 export default FanPortal;

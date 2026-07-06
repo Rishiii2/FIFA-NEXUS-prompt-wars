@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Navigation, Train, Utensils } from 'lucide-react';
+import PropTypes from 'prop-types';
 import './FanCards.css';
 
-const FanCards = () => {
+/**
+ * Fan Information Cards Component
+ * @returns {JSX.Element}
+ */
+const FanCards = memo(() => {
   return (
     <div className="fan-cards">
       <div className="glass-panel fan-card">
@@ -30,6 +35,9 @@ const FanCards = () => {
       </div>
     </div>
   );
-};
+});
+
+FanCards.displayName = 'FanCards';
+FanCards.propTypes = {};
 
 export default FanCards;

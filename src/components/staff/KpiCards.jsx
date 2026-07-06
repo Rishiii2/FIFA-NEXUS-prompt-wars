@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useData } from '../../data/DataContext';
 import { Users, Clock, AlertTriangle, TrendingUp } from 'lucide-react';
+import PropTypes from 'prop-types';
 import './KpiCards.css';
 
-const KpiCards = () => {
+/**
+ * KPI Cards Component for Dashboard
+ * @returns {JSX.Element}
+ */
+const KpiCards = memo(() => {
   const { capacity, waitTimes } = useData();
 
   const cards = [
@@ -27,6 +32,9 @@ const KpiCards = () => {
       ))}
     </div>
   );
-};
+});
+
+KpiCards.displayName = 'KpiCards';
+KpiCards.propTypes = {};
 
 export default KpiCards;

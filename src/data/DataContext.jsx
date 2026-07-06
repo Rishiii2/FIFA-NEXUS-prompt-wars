@@ -1,10 +1,21 @@
-import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { runMultiAgentPipeline } from '../services/gemini';
+import PropTypes from 'prop-types';
 
 const DataContext = createContext();
 
+/**
+ * Custom hook to use the DataContext
+ * @returns {Object} The context value
+ */
 export const useData = () => useContext(DataContext);
 
+/**
+ * Provider component for global state
+ * @param {Object} props
+ * @param {React.ReactNode} props.children
+ * @returns {JSX.Element}
+ */
 export const DataProvider = ({ children }) => {
   const [capacity, setCapacity] = useState(87);
   const [alerts, setAlerts] = useState([
@@ -29,9 +40,15 @@ export const DataProvider = ({ children }) => {
     zonesRef.current = zones;
   }, [zones]);
 
-  const addAlert = (text, type = 'info', reasoningTrace = null) => {
+  /**
+   * Adds a new alert to the system
+   * @param {string} text - The alert message
+   * @param {string} [type='info'] - The type of alert (info, warning, success)
+   * @param {string|null} [reasoningTrace=null] - The AI reasoning trace
+   */
+  const addAlert = useCallback((text, type = 'info', reasoningTrace = null) => {
     setAlerts(prev => [{ id: Date.now() + Math.random(), text, type, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), reasoningTrace }, ...prev]);
-  };
+  }, []);
 
   // Simulate live data updates for basic metrics
   useEffect(() => {
@@ -72,11 +89,19 @@ export const DataProvider = ({ children }) => {
       }
     }, 15000);
     return () => clearInterval(aiInterval);
-  }, []);
+  }, [addAlert]);
+
+  const contextValue = useMemo(() => ({
+    capacity, waitTimes, alerts, addAlert, zones, setZones
+  }), [capacity, waitTimes, alerts, addAlert, zones]);
 
   return (
-    <DataContext.Provider value={{ capacity, waitTimes, alerts, addAlert, zones, setZones }}>
+    <DataContext.Provider value={contextValue}>
       {children}
     </DataContext.Provider>
   );
+};
+
+DataProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };

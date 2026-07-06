@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import PropTypes from 'prop-types';
 
 const data = [
   { time: '18:00', historical: 40, predicted: 40 },
@@ -12,6 +13,14 @@ const data = [
   { time: '19:45', historical: null, predicted: 50 },
 ];
 
+/**
+ * Custom Tooltip for the chart
+ * @param {Object} props - Component props
+ * @param {boolean} [props.active] - Whether the tooltip is active
+ * @param {Array} [props.payload] - The data payload for the tooltip
+ * @param {string} [props.label] - The label for the tooltip
+ * @returns {JSX.Element|null}
+ */
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
@@ -28,7 +37,17 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-const CrowdFlowChart = () => {
+CustomTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.array,
+  label: PropTypes.string
+};
+
+/**
+ * Chart component showing crowd density forecast
+ * @returns {JSX.Element}
+ */
+const CrowdFlowChart = memo(() => {
   return (
     <div className="glass-panel" style={{ height: '350px', padding: '1rem', marginTop: '1rem' }}>
       <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>
@@ -56,6 +75,8 @@ const CrowdFlowChart = () => {
       </ResponsiveContainer>
     </div>
   );
-};
+});
+
+CrowdFlowChart.displayName = 'CrowdFlowChart';
 
 export default CrowdFlowChart;

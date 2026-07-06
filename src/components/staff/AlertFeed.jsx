@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useData } from '../../data/DataContext';
 import { ShieldAlert, Info, Zap } from 'lucide-react';
+import PropTypes from 'prop-types';
 import './AlertFeed.css';
 
-const AlertFeed = () => {
+/**
+ * Feed of AI-generated alerts
+ * @returns {JSX.Element}
+ */
+const AlertFeed = memo(() => {
   const { alerts } = useData();
 
   const getIcon = (type) => {
@@ -36,6 +41,9 @@ const AlertFeed = () => {
       </div>
     </div>
   );
-};
+});
+
+AlertFeed.displayName = 'AlertFeed';
+AlertFeed.propTypes = {};
 
 export default AlertFeed;

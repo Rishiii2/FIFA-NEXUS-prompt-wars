@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
@@ -124,7 +124,29 @@
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -138,6 +160,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -155,6 +185,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -184,9 +224,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { memo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import PropTypes from 'prop-types';
 &nbsp;
 const data = <span class="cstat-no" title="statement not covered" >[</span>
   { time: '18:00', historical: 40, predicted: 40 },
@@ -199,6 +242,14 @@ const data = <span class="cstat-no" title="statement not covered" >[</span>
   { time: '19:45', historical: null, predicted: 50 },
 ];
 &nbsp;
+/**
+ * Custom Tooltip for the chart
+ * @param {Object} props - Component props
+ * @param {boolean} [props.active] - Whether the tooltip is active
+ * @param {Array} [props.payload] - The data payload for the tooltip
+ * @param {string} [props.label] - The label for the tooltip
+ * @returns {JSX.Element|null}
+ */
 const <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >CustomTooltip = ({</span> active, payload, label }) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  if (active &amp;&amp; payload &amp;&amp; payload.length) {</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
@@ -215,7 +266,17 @@ const <span class="cstat-no" title="statement not covered" ><span class="fstat-n
 <span class="cstat-no" title="statement not covered" >  return null;</span>
 };
 &nbsp;
-const <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >CrowdFlowChart = () =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >CustomTooltip.propTypes = {</span>
+  active: PropTypes.bool,
+  payload: PropTypes.array,
+  label: PropTypes.string
+};
+&nbsp;
+/**
+ * Chart component showing crowd density forecast
+ * @returns {JSX.Element}
+ */
+const <span class="cstat-no" title="statement not covered" >CrowdFlowChart = <span class="fstat-no" title="function not covered" >memo(() =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;div className="glass-panel" style={{ height: '350px', padding: '1rem', marginTop: '1rem' }}&gt;
       &lt;h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--text-primary)' }}&gt;
@@ -243,7 +304,9 @@ const <span class="cstat-no" title="statement not covered" ><span class="fstat-n
       &lt;/ResponsiveContainer&gt;
     &lt;/div&gt;
   );
-};
+});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >CrowdFlowChart.displayName = 'CrowdFlowChart';</span>
 &nbsp;
 export default CrowdFlowChart;
 &nbsp;</pre></td></tr></table></pre>
@@ -253,7 +316,7 @@ export default CrowdFlowChart;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-06T18:29:07.194Z
+                at 2026-07-06T18:38:24.539Z
             </div>
         <script src="../prettify.js"></script>
         <script>

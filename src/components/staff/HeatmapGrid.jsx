@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './HeatmapGrid.css';
 import { Map, Zap } from 'lucide-react';
 import { useData } from '../../data/DataContext';
 
-const HeatmapGrid = () => {
+/**
+ * Component to display the live stadium heatmap
+ * @returns {JSX.Element}
+ */
+const HeatmapGrid = memo(() => {
   const { addAlert, zones, setZones } = useData();
 
+  /**
+   * Deploys staff to a specific zone
+   * @param {string} zoneId - The ID of the zone
+   */
   const handleDeployStaff = (zoneId) => {
     setZones(prev => prev.map(z => z.id === zoneId ? { ...z, density: Math.max(0, z.density - 30) } : z));
     addAlert(`Action: Staff deployed to Zone ${zoneId}. Crowd density decreasing.`, 'success');
   };
 
+  /**
+   * Gets the color based on density
+   * @param {number} density - The crowd density percentage
+   * @returns {string} The CSS color value
+   */
   const getColor = (density) => {
     if (density > 80) return 'var(--accent-magenta)';
     if (density > 60) return '#ffaa00';
@@ -49,6 +62,8 @@ const HeatmapGrid = () => {
       </div>
     </div>
   );
-};
+});
+
+HeatmapGrid.displayName = 'HeatmapGrid';
 
 export default HeatmapGrid;
